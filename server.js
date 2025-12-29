@@ -62,7 +62,10 @@ nextApp.prepare().then(() => {
   })
 
   const PORT = process.env.PORT || 5000
-  expressApp.listen(PORT, () => {
-    console.log(`[Server] Running on port ${PORT}`)
+  console.log(`[Server] Starting server on port ${PORT}`)
+  
+  expressApp.listen(PORT, '0.0.0.0', () => {
+    console.log(`[Server] Successfully running on port ${PORT}`)
+    console.log(`[Server] Environment: ${process.env.NODE_ENV || 'development'}`)
   })
 })
