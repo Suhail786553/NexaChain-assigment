@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+
+const API_BASE_URL = "https://nexachain-assigment.onrender.com"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
@@ -117,7 +119,7 @@ export default function Dashboard() {
     setLoading(true)
     setError("")
     try {
-      const response = await fetch(`http://localhost:5000/api/users/dashboard?t=${Date.now()}`, {
+      const response = await fetch(`${API_BASE_URL}/api/users/dashboard?t=${Date.now()}`, {
         headers: { 
           Authorization: `Bearer ${token}`,
           "Cache-Control": "no-cache",
@@ -221,7 +223,7 @@ export default function Dashboard() {
   // Fetch ROI history
   const fetchROIHistory = async (token: string) => {
     try {
-      const response = await fetch("http://localhost:5000/api/roi/history?limit=30", {
+      const response = await fetch(`${API_BASE_URL}/api/roi/history?limit=30`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       if (!response.ok) throw new Error("Failed to fetch ROI history")
@@ -236,7 +238,7 @@ export default function Dashboard() {
   const fetchReferralTree = async (token: string) => {
     try {
       console.log("Fetching referral tree...")
-      const response = await fetch("http://localhost:5000/api/users/referral-tree", {
+      const response = await fetch(`${API_BASE_URL}/api/users/referral-tree`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       
@@ -267,7 +269,7 @@ export default function Dashboard() {
     setLoading(true)
     setError("")
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(credentials)
@@ -297,7 +299,7 @@ export default function Dashboard() {
     setLoading(true)
     setError("")
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: credentials.email, password: credentials.password })
